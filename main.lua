@@ -82,6 +82,9 @@ local function display_dupes(cwd, data, mark, mode_text)
 
 	-- Build file list from duplicate sets
 	local files = {}
+	table.sort(data.matchSets, function (a, b)
+		return a.fileSize > b.fileSize
+	end)
 	for i, matchSet in ipairs(data.matchSets) do
 		local dupe_set = string.format("dup-set-%02d", i)
 		ya.dbg(string.format("Processing group: %s", dupe_set))
